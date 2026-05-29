@@ -5,7 +5,7 @@ import {
   SheetDivider,
   SheetHeavyDivider,
 } from './DetailSheet';
-import { FEEDBACK_URL, openExternal } from '../links';
+import { FEEDBACK_URL, GITHUB_URL, openExternal } from '../links';
 
 interface AboutCard {
   title: string;
@@ -243,11 +243,11 @@ const CARDS: AboutCard[] = [
             Public License v3 (AGPLv3).
           </SheetSection>
           <SheetSection>
-            The code isn't posted to GitHub yet, but it's available on
-            request in the meantime — message me and I'll share it. You
-            shouldn't have to take my word for any of the claims above;
-            you're welcome to read the source and check for yourself.
+            The code is on GitHub. You shouldn't have to take my word for
+            any of the claims above; you're welcome to read the source and
+            check for yourself.
           </SheetSection>
+          <ExternalLinkButton label="🐙 VIEW SOURCE" href={GITHUB_URL} />
         </>
       ),
     },

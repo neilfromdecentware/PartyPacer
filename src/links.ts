@@ -1,4 +1,5 @@
 export const FEEDBACK_URL = 'https://partypacer-feedback.web.app/';
+export const GITHUB_URL = 'https://github.com/neilfromdecentware/PartyPacer';
 
 // Open external URL; try to leave the app for the system browser.
 // iOS standalone PWA — no relaible Safari hand-off; '_system' sometimes
