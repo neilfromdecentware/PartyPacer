@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#000000" />
+    <title>PARTYPACER Feedback</title>
+    <link rel="icon" href="/icon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      html,
+      body {
+        margin: 0;
+        background: #000;
+        color: #fff;
+        font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text',
+          Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      body {
+        min-height: 100vh;
+        padding:
+          calc(env(safe-area-inset-top, 0px) + 2rem) 1.25rem
+          calc(env(safe-area-inset-bottom, 0px) + 2rem);
+        max-width: 480px;
+        margin: 0 auto;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      header img {
+        width: 2.75rem;
+        height: 2.75rem;
+      }
+      h1.wordmark {
+        margin: 0;
+        font-size: 2.25rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        line-height: 1;
+      }
+      h2 {
+        margin: 0;
+        font-size: 1.6rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+      }
+      p.lead {
+        margin: 0;
+        color: #aaa;
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+      .emoji-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.6rem;
+      }
+      .emoji-btn {
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #111;
+        color: #fff;
+        border: none;
+        border-radius: 16px;
+        font-size: 3rem;
+        line-height: 1;
+        cursor: pointer;
+        font-family: inherit;
+        padding: 0;
+      }
+      .emoji-btn[aria-pressed='true'] {
+        box-shadow: 0 0 0 3px #fff;
+      }
+      textarea {
+        width: 100%;
+        min-height: 6rem;
+        background: #111;
+        color: #fff;
+        border: 1px solid #333;
+        border-radius: 12px;
+        padding: 0.85rem 1rem;
+        font-size: 1rem;
+        font-family: inherit;
+        resize: vertical;
+        box-sizing: border-box;
+      }
+      textarea:focus {
+        outline: none;
+        border-color: #c084fc;
+      }
+      button.primary {
+        width: 100%;
+        padding: 1rem;
+        background: transparent;
+        color: #fff;
+        border: 2px solid #fff;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      button.primary:disabled {
+        opacity: 0.4;
+        cursor: default;
+      }
+      a.drink {
+        width: 100%;
+        padding: 0.85rem;
+        background: transparent;
+        color: #fff;
+        border: 1px solid #333;
+        border-radius: 12px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        font-family: inherit;
+        margin-top: auto;
+        text-align: center;
+        text-decoration: none;
+        box-sizing: border-box;
+        display: block;
+      }
+      a.drink:hover,
+      a.drink:focus {
+        border-color: #fff;
+        outline: none;
+      }
+      .status {
+        color: #c084fc;
+        font-size: 0.9rem;
+        text-align: center;
+        margin: 0;
+      }
+      .status.error {
+        color: #ff6b6b;
+      }
+      .spacer {
+        flex: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <img src="/icon.svg" alt="" />
+      <h1 class="wordmark">PARTYPACER</h1>
+    </header>
+
+    <h2>FEEDBACK</h2>
+
+    <p class="lead">
+      PARTYPACER doesn't talk to any server, so I get zero metrics on the app
+      — I have no idea if anyone uses it or what they think. I'd really
+      appreciate hearing anything from you.
+    </p>
+
+    <div class="emoji-grid" role="radiogroup" aria-label="How do you feel about PARTYPACER?">
+      <button class="emoji-btn" data-value="very-happy" role="radio" aria-checked="false" aria-label="Very happy">🤩</button>
+      <button class="emoji-btn" data-value="happy" role="radio" aria-checked="false" aria-label="Happy">😀</button>
+      <button class="emoji-btn" data-value="thumbs-up" role="radio" aria-checked="false" aria-label="Thumbs up">👍</button>
+      <button class="emoji-btn" data-value="neutral" role="radio" aria-checked="false" aria-label="Neutral">😐</button>
+      <button class="emoji-btn" data-value="thumbs-down" role="radio" aria-checked="false" aria-label="Thumbs down">👎</button>
+      <button class="emoji-btn" data-value="angry" role="radio" aria-checked="false" aria-label="Angry">😡</button>
+    </div>
+
+    <textarea
+      id="comment"
+      placeholder="Anything you want to tell me (optional)"
+      maxlength="2000"
+    ></textarea>
+
+    <button class="primary" id="submit" disabled>SEND FEEDBACK</button>
+
+    <p class="status" id="status" hidden></p>
+
+    <div class="spacer"></div>
+
+    <a
+      class="drink"
+      href="https://buy.stripe.com/28E5kw9J922c7i66lbabK00"
+      target="_blank"
+      rel="noopener noreferrer"
+    >🍹 BUY ME A DRINK</a>
+
+    <!-- Firebase web config lives in firebase-config.js (gitignored,
+         per-deployer). Copy firebase-config.example.js to set up a fork. -->
+    <script src="firebase-config.js"></script>
+    <script type="module">
+      import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js';
+      import {
+        getFirestore,
+        addDoc,
+        collection,
+        serverTimestamp,
+      } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js';
+
+      const firebaseConfig = window.__FIREBASE_CONFIG__;
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      const FEEDBACK_RECIPIENT = 'NeilFromDecentware@gmail.com';
+
+      const EMOJI_LABELS = {
+        'very-happy': '🤩 Very happy',
+        happy: '😀 Happy',
+        'thumbs-up': '👍 Thumbs up',
+        neutral: '😐 Neutral',
+        'thumbs-down': '👎 Thumbs down',
+        angry: '😡 Angry',
+      };
+
+      let selected = null;
+      const buttons = document.querySelectorAll('.emoji-btn');
+      const submitBtn = document.getElementById('submit');
+      const commentInput = document.getElementById('comment');
+      const statusEl = document.getElementById('status');
+
+      function updateSubmit() {
+        submitBtn.disabled = !selected;
+      }
+
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          selected = btn.dataset.value;
+          buttons.forEach((b) => {
+            const isSelected = b === btn;
+            b.setAttribute('aria-checked', isSelected ? 'true' : 'false');
+            b.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+          });
+          updateSubmit();
+        });
+      });
+
+      function showStatus(text, isError = false) {
+        statusEl.hidden = false;
+        statusEl.textContent = text;
+        statusEl.classList.toggle('error', isError);
+      }
+
+      submitBtn.addEventListener('click', async () => {
+        if (!selected) return;
+        submitBtn.disabled = true;
+        showStatus('Sending…');
+        const comment = commentInput.value.trim();
+        const label = EMOJI_LABELS[selected] ?? selected;
+        try {
+          await addDoc(collection(db, 'feedback'), {
+            feeling: selected,
+            comment: comment || null,
+            userAgent: navigator.userAgent,
+            createdAt: serverTimestamp(),
+          });
+          await addDoc(collection(db, 'mail'), {
+            to: FEEDBACK_RECIPIENT,
+            message: {
+              subject: `[PARTYPACER feedback] ${label}`,
+              text: `Feeling: ${label}\n\nComment:\n${comment || '(no comment)'}\n\nUA: ${navigator.userAgent}\n`,
+            },
+          });
+          showStatus('Thanks — got it.');
+          submitBtn.textContent = 'SENT ✓';
+          commentInput.disabled = true;
+          buttons.forEach((b) => (b.disabled = true));
+        } catch (err) {
+          console.error(err);
+          showStatus(
+            "Couldn't send — try again in a moment. " + (err?.message ?? ''),
+            true,
+          );
+          submitBtn.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>

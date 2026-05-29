@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "YOUR_FIREBASE_PROJECT_ID"
+  },
+  "targets": {
+    "YOUR_FIREBASE_PROJECT_ID": {
+      "hosting": {
+        "party-pacer": ["YOUR_APP_SITE_ID"],
+        "partypacer-preview": ["YOUR_PREVIEW_SITE_ID"],
+        "partypacer-feedback": ["YOUR_FEEDBACK_SITE_ID"]
+      }
+    }
+  }
+}

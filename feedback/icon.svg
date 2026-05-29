@@ -1,0 +1,25 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="face" cx="35%" cy="28%" r="85%">
+      <stop offset="0%" stop-color="#F5B8FF"/>
+      <stop offset="40%" stop-color="#C724FF"/>
+      <stop offset="100%" stop-color="#3B0764"/>
+    </radialGradient>
+    <radialGradient id="rim" cx="65%" cy="72%" r="85%">
+      <stop offset="0%" stop-color="#F5B8FF"/>
+      <stop offset="40%" stop-color="#C724FF"/>
+      <stop offset="100%" stop-color="#3B0764"/>
+    </radialGradient>
+    <radialGradient id="feature" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#5B3C75"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" fill="#000000"/>
+  <circle cx="256" cy="256" r="210" fill="url(#face)"/>
+  <circle cx="256" cy="256" r="210" fill="none" stroke="url(#rim)" stroke-width="24"/>
+  <ellipse cx="186" cy="328" rx="30" ry="38" fill="url(#feature)"/>
+  <ellipse cx="326" cy="328" rx="30" ry="38" fill="url(#feature)"/>
+  <path d="M 178 200 Q 256 152 334 200"
+        stroke="url(#feature)" stroke-width="32" stroke-linecap="round" fill="none"/>
+</svg>

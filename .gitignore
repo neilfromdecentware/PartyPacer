@@ -1,0 +1,22 @@
+node_modules
+dist
+*.tsbuildinfo
+.firebase
+.DS_Store
+extensions/*.env
+
+# Private analytics dashboard — self-contained, kept out of the public repo
+# (its Firebase site ID is the only thing gating access). See dashboard/README.md.
+dashboard/
+
+# Decentware landing page — separate site, self-contained, not part of this
+# repo. See decentware/README.md.
+decentware/
+
+# External code-review notes — never publish
+*_review_*.md
+
+# Per-deployer Firebase config — kept out of the repo for forkability.
+# Copy the committed *.example files and fill in your own project.
+.firebaserc
+feedback/firebase-config.js

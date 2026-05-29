@@ -1,0 +1,49 @@
+rules_version = '2';
+
+// PARTYPACER itself never touches Firestore. These rules exist only for the
+// standalone feedback page (partypacer-feedback.web.app), which writes a
+// /feedback record and a /mail doc (consumed by the Trigger Email extension).
+//
+// Everything is locked down as far as rules allow: field allowlists, type
+// checks, size caps, a fixed mail recipient, and no reads/edits/deletes of
+// anything. Rules CANNOT rate-limit — true abuse prevention (a scripted
+// client spamming valid-shaped docs) needs Firebase App Check or moving the
+// mail send behind a throttled Cloud Function.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isFeedback(d) {
+      return d.keys().hasOnly(['feeling', 'comment', 'userAgent', 'createdAt'])
+        && d.feeling in ['very-happy', 'happy', 'thumbs-up', 'neutral', 'thumbs-down', 'angry']
+        && (!('comment' in d) || d.comment == null
+            || (d.comment is string && d.comment.size() <= 2000))
+        && (!('userAgent' in d)
+            || (d.userAgent is string && d.userAgent.size() <= 1000));
+    }
+
+    function isMail(d) {
+      return d.keys().hasOnly(['to', 'message'])
+        && d.to == 'NeilFromDecentware@gmail.com'
+        && d.message is map
+        && d.message.keys().hasOnly(['subject', 'text'])
+        && d.message.subject is string && d.message.subject.size() <= 200
+        && d.message.text is string && d.message.text.size() <= 5000;
+    }
+
+    match /feedback/{doc} {
+      allow create: if isFeedback(request.resource.data);
+      allow read, update, delete: if false;
+    }
+
+    match /mail/{doc} {
+      allow create: if isMail(request.resource.data);
+      allow read, update, delete: if false;
+    }
+
+    // Everything else (including the now-defunct analytics `hits`): locked.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
